@@ -1,0 +1,23 @@
+{
+  "name": "brulisting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "migrate:refresh": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^9.0.0",
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "knex": "^0.95.4",
+    "objection": "^2.2.15",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {
+    "faker": "^5.5.3",
+    "nodemon": "^2.0.7"
+  }
+}

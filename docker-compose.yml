@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  # web:
+  #   container_name: ${APP_NAME}
+  #   image: ee0dd0712e5e
+  #   env_file:
+  #     - .env # load the .env file into this container
+  #   ports:
+  #     - '${APP_PORT}:${APP_PORT}'
+  #   links:
+  #     - 'db_pg:db_pg'
+  #     # - 'db_mysql:db_mysql'
+  #   depends_on:
+  #     - db_pg
+  #     # - db_mysql
+
+  db_pg:
+    container_name: brulisting_db_pg
+    image: postgres:13-alpine
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_ROOT_PASSWORD} # Super User Password
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_DB: ${DATABASE_DB}
+
+  redis:
+    container_name: project_redis
+    image: redis:6-alpine
+    volumes:
+      - ./redis:/data
+    ports:
+      - "6379:6379"
+
+  # db_mysql:
+  #   container_name: project_db_mysql
+  #   image: mysql:5.7
+  #   restart: always
+  #   volumes:
+  #     - ./data:/var/lib/mysql
+  #   ports:
+  #     - ${DATABASE_PORT}:${DATABASE_PORT}
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+  #     MYSQL_DATABASE: ${DATABASE_DB}
+  #     MYSQL_USER: ${DATABASE_USERNAME}
+  #     MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+
+  # If you are struggling to login to your adminer,
+  # delete data folder in the root folder,
+  # and delete the container
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db_pg
+      # - db_mysql
