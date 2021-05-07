@@ -13,6 +13,8 @@ const {
   findUserByUsername,
   storeRefreshToken,
   findUserByToken,
+  deleteRefreshToken,
+  checkRefreshTokenExist,
 } = require("../services/users.service");
 
 const router = express.Router();
@@ -107,6 +109,26 @@ router.post("/token", async (req, res) => {
 
   if (refresh_token === null) return res.sendStatus(401);
 
+  let _user = await findUserByToken(refresh_token);
+
+  if (_user === undefined) return res.sendStatus(401);
+
+  const { user, err } = await verifyRefreshToken(refresh_token);
+
+  if (err) return res.sendStatus(403);
+
+  if (!_user instanceof User) return res.sendStatus(401);
+
+  const access_token = await generateAccessToken({ email: user.email });
+
+  res.json({ access_token });
+});
+
+router.delete("/", async (req, res) => {
+  const refresh_token = req.body.token;
+
+  if (refresh_token === null) return res.sendStatus(401);
+
   const _user = await findUserByToken(refresh_token);
 
   if (!_user instanceof User) return res.sendStatus(401);
@@ -115,9 +137,12 @@ router.post("/token", async (req, res) => {
 
   if (err) return res.sendStatus(403);
 
-  const access_token = await generateAccessToken({ email: user.email });
+  const deleted = await deleteRefreshToken(user.email);
 
-  res.json({ access_token });
+  res.status(200).json({
+    success: true,
+    message: "Logged out",
+  });
 });
 
 module.exports = router;

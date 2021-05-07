@@ -22,5 +22,13 @@ POST http://localhost:3000/api/auth/token
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTYyMDQxNDkxNH0.9TrOBcXhvJipr97AbAo3qnlEXrJDMzMNg4f2DeAYrHs"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTYyMDQxNTg5MH0.e6cdAj2Jrw3XqKpAPM_VBUvvPgZvi_S4fe-bqp8F4Us"
+}
+###
+
+DELETE http://localhost:3000/api/auth/
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTYyMDQxNTg5MH0.e6cdAj2Jrw3XqKpAPM_VBUvvPgZvi_S4fe-bqp8F4Us"
 }

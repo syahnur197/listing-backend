@@ -50,3 +50,19 @@ exports.storeRefreshToken = async (email, refresh_token) => {
 
   return updated;
 };
+
+exports.deleteRefreshToken = async (email) => {
+  const updated = await User.query()
+    .patch({ refresh_token: null })
+    .where("email", email);
+
+  return updated;
+};
+
+exports.checkRefreshTokenExist = async (email, refresh_token) => {
+  const user = await User.query()
+    .where("email", email)
+    .andWhere("refresh_token", refresh_token);
+
+  return user[0];
+};
