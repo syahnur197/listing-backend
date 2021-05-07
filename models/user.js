@@ -1,5 +1,5 @@
 const Model = require("../config/model");
-const { hashPassword } = require("../services/hasher");
+const { hashPassword } = require("../services/hasher.service");
 const Property = require("./property");
 
 class User extends Model {

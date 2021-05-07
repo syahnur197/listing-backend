@@ -1,25 +1,13 @@
+require("dotenv").config();
+
 const express = require("express");
-const app = express();
+const { setMiddlewares } = require("./setup/middlewares");
+const { setRoutes } = require("./setup/routes");
 
-// setting up the views
-app.set("view engine", "hbs");
-app.set("views", __dirname + "/views");
+const app = setRoutes(setMiddlewares(express()));
 
-const hbs = require("hbs");
-hbs.registerPartials(__dirname + "/views/partials", function (err) {});
-
-// setting up routing
-
-const home = require("./controllers/home");
-
-app.use("/", home);
-
-// serving static assets
-
-app.use("/public", express.static(__dirname + "/public"));
-
-const port = 3000;
+const port = process.env.APP_PORT;
 
 app.listen(port, () => {
-  console.log("Brulisting listening at http://localhost:3000");
+  console.log(`Brulisting listening at http://localhost:${port}`);
 });

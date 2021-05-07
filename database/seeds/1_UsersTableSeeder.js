@@ -1,5 +1,5 @@
-const User = require("../models/user");
 const faker = require("faker");
+const User = require("../../models/user");
 
 exports.seed = async function (knex) {
   knex.raw("TRUNCATE TABLE users CASCADE");

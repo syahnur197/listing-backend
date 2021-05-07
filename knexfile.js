@@ -16,6 +16,10 @@ module.exports = {
     },
     migrations: {
       tableName: "migrations",
+      directory: "./database/migrations",
+    },
+    seeds: {
+      directory: "./database/seeds",
     },
   },
 
@@ -32,6 +36,10 @@ module.exports = {
     },
     migrations: {
       tableName: "migrations",
+      directory: "./database/migrations",
+    },
+    seeds: {
+      directory: "./database/seeds",
     },
   },
 };
