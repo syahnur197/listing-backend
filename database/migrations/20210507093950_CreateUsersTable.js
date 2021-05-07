@@ -7,6 +7,7 @@ exports.up = function (knex) {
     table.string("username").unique();
     table.string("password");
     table.string("mobile_number");
+    table.string("refresh_token").unique().nullable();
     table.timestamps(true, true);
   });
 };

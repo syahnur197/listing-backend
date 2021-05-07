@@ -1,0 +1,26 @@
+GET http://localhost:3000/api/users
+
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com",
+    "password": "password"
+}
+
+
+###
+
+GET http://localhost:3000/api/auth/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTYyMDQxNDUzMCwiZXhwIjoxNjIwNTAwOTMwfQ._JpzUc0WvAWNsM5gtma2HKKM2cYx8WJQXPFDbRyikxs
+
+###
+
+POST http://localhost:3000/api/auth/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTYyMDQxNDkxNH0.9TrOBcXhvJipr97AbAo3qnlEXrJDMzMNg4f2DeAYrHs"
+}

@@ -24,4 +24,4 @@ class PropertyType extends Model {
   }
 }
 
-module.exports = Property;
+module.exports = PropertyType;

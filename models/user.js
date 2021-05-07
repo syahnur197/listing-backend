@@ -28,6 +28,13 @@ class User extends Model {
     await super.$beforeInsert(queryContext);
     this.password = await hashPassword(this.password);
   }
+
+  $formatJson(jsonRaw) {
+    // Remember to call the super class's implementation.
+    const { password, refresh_token, ...json } = super.$formatJson(jsonRaw);
+    // Do your conversion here.
+    return json;
+  }
 }
 
 module.exports = User;

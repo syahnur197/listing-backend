@@ -1,6 +1,6 @@
 const Model = require("../config/model");
+const PropertyType = require("./propery-type");
 const User = require("./user");
-
 class Property extends Model {
   static get tableName() {
     return "properties";
@@ -18,6 +18,14 @@ class Property extends Model {
         join: {
           from: "properties.user_id",
           to: "users.id",
+        },
+      },
+      property_type: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: PropertyType,
+        join: {
+          from: "properties.property_type_id",
+          to: "property_types.id",
         },
       },
     };
