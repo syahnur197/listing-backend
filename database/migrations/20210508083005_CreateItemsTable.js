@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.bigInteger("user_id").index();
     table.string("name");
+    table.string("short_description");
     table.text("description");
     table.bigInteger("price");
     table.boolean("sold").default(false);

@@ -26,12 +26,23 @@ router.get("/", authenticateToken, async (req, res) => {
 router.post(
   "/register",
 
-  body("first_name").notEmpty(),
+  body("first_name")
+    .isLength({ min: 3 })
+    .withMessage("First name must not be less than characters")
+    .isLength({ max: 255 })
+    .withMessage("First name must not be mroe than 255 characters"),
 
-  body("last_name").notEmpty(),
+  body("last_name")
+    .isLength({ min: 3 })
+    .withMessage("Last name must not be less than characters")
+    .isLength({ max: 255 })
+    .withMessage("Last name must not be mroe than 255 characters"),
 
   body("username")
-    .notEmpty()
+    .isLength({ min: 3 })
+    .withMessage("Username must not be less than characters")
+    .isLength({ max: 255 })
+    .withMessage("Username must not be mroe than 255 characters")
     .custom((value) => {
       return findUserByUsername(value).then((user) => {
         if (user instanceof User) {
@@ -41,7 +52,10 @@ router.post(
     }),
 
   body("email")
-    .notEmpty()
+    .isLength({ min: 3 })
+    .withMessage("E-Mail address must not be less than characters")
+    .isLength({ max: 255 })
+    .withMessage("E-Mail address must not be mroe than 255 characters")
     .isEmail()
     .custom((value) => {
       return findUserByEmail(value).then((user) => {
@@ -51,7 +65,9 @@ router.post(
       });
     }),
 
-  body("password").notEmpty(),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must not be less than characters"),
 
   body("password_confirmation")
     .notEmpty()

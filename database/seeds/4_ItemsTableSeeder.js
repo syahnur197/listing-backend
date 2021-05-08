@@ -15,7 +15,8 @@ exports.seed = async function (knex) {
     await Item.query().insert({
       user_id: pickRandomElement(user_ids).id,
       name: faker.name.firstName(),
-      description: faker.lorem.sentence(20),
+      short_description: faker.lorem.sentence(15),
+      description: faker.lorem.sentence(200),
       price: 10000,
       sold: faker.datatype.boolean(),
     });

@@ -23,6 +23,10 @@ class Item extends Model {
       },
     };
   }
+
+  isOwnedBy(user_id) {
+    return parseInt(this.user_id) === parseInt(user_id);
+  }
 }
 
 module.exports = Item;

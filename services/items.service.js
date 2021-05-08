@@ -41,6 +41,7 @@ exports.createItem = async (item) => {
     name: item.name,
     price: item.price,
     user_id: item.user_id,
+    short_description: item.short_description,
     description: item.description,
   };
 
@@ -54,5 +55,15 @@ exports.updateItem = async (item) => {
 
   const updated_item = await Item.query().patch(item_detail).where("id", id);
 
-  return updated_item;
+  if (updated_item) {
+    return item;
+  }
+
+  return false;
+};
+
+exports.deleteItem = async (item_id) => {
+  const deleted_item = await Item.query().deleteById(parseInt(item_id));
+
+  return deleted_item > 0;
 };
