@@ -15,7 +15,7 @@ services:
   #     # - db_mysql
 
   db_pg:
-    container_name: brulisting_db_pg
+    container_name: db
     image: postgres:13-alpine
     restart: always
     volumes:

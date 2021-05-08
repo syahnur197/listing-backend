@@ -1,5 +1,6 @@
 const Model = require("../config/model");
 const { hashPassword } = require("../services/hasher.service");
+const Item = require("./item");
 const Property = require("./property");
 
 class User extends Model {
@@ -19,6 +20,14 @@ class User extends Model {
         join: {
           from: "users.id",
           to: "properties.user_id",
+        },
+      },
+      properties: {
+        relation: Model.HasManyRelation,
+        modelClass: Item,
+        join: {
+          from: "users.id",
+          to: "items.user_id",
         },
       },
     };

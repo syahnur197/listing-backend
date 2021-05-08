@@ -1,4 +1,5 @@
 const express = require("express");
+const { body, validationResult } = require("express-validator");
 const { authenticateToken } = require("../middlewares/authenticateToken");
 const User = require("../models/user");
 const {
@@ -14,7 +15,6 @@ const {
   storeRefreshToken,
   findUserByToken,
   deleteRefreshToken,
-  checkRefreshTokenExist,
 } = require("../services/users.service");
 
 const router = express.Router();
@@ -23,58 +23,75 @@ router.get("/", authenticateToken, async (req, res) => {
   res.status(200).json(req.user);
 });
 
-router.post("/register", async (req, res) => {
-  const {
-    first_name,
-    last_name,
-    username,
-    email,
-    password,
-    password_confirmation,
-    mobile_number,
-  } = req.body;
+router.post(
+  "/register",
 
-  // password confirmation validation
-  if (password !== password_confirmation) {
-    res
-      .status(400)
-      .json({ success: false, message: "Password does not match!" });
-    return;
-  }
+  body("first_name").notEmpty(),
 
-  // unique email validation
-  let user = await findUserByEmail(email);
+  body("last_name").notEmpty(),
 
-  if (user instanceof User) {
-    res
-      .status(400)
-      .json({ success: false, message: "User with the email already exist!" });
-    return;
-  }
+  body("username")
+    .notEmpty()
+    .custom((value) => {
+      return findUserByUsername(value).then((user) => {
+        if (user instanceof User) {
+          return Promise.reject("Username already exist");
+        }
+      });
+    }),
 
-  // unique username validation
-  user = await findUserByUsername(username);
+  body("email")
+    .notEmpty()
+    .isEmail()
+    .custom((value) => {
+      return findUserByEmail(value).then((user) => {
+        if (user instanceof User) {
+          return Promise.reject("E-mail already exist");
+        }
+      });
+    }),
 
-  if (user instanceof User) {
-    res.status(400).json({
-      success: false,
-      message: "User with the username already exist!",
+  body("password").notEmpty(),
+
+  body("password_confirmation")
+    .notEmpty()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        return Promise.reject("Password confirmation does not match password");
+      }
+
+      return true;
+    }),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      first_name,
+      last_name,
+      username,
+      email,
+      password,
+      password_confirmation,
+      mobile_number,
+    } = req.body;
+
+    user = await createUser({
+      first_name,
+      last_name,
+      username,
+      email,
+      password,
+      password_confirmation,
+      mobile_number,
     });
-    return;
+
+    res.status(201).json({ user });
   }
-
-  user = await createUser({
-    first_name,
-    last_name,
-    username,
-    email,
-    password,
-    password_confirmation,
-    mobile_number,
-  });
-
-  res.status(201).json({ user });
-});
+);
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -137,7 +154,7 @@ router.delete("/", async (req, res) => {
 
   if (err) return res.sendStatus(403);
 
-  const deleted = await deleteRefreshToken(user.email);
+  await deleteRefreshToken(user.email);
 
   res.status(200).json({
     success: true,

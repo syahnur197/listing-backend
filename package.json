@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon index.js",
-    "migrate:refresh": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run"
+    "migrate:refresh": "npx knex migrate:rollback --all && npx knex migrate:latest && npx knex seed:run",
+    "make:migration": "npx knex migrate:make"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -13,6 +14,7 @@
     "crypto": "^1.0.1",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
+    "express-validator": "^6.11.0",
     "global": "^4.4.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",

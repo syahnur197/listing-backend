@@ -1,6 +1,6 @@
 const express = require("express");
-const { getAllUsers } = require("../services/users.service");
 const router = express.Router();
+const { getAllUsers } = require("../services/users.service");
 
 // define the home page route
 router.get("/", async function (req, res) {
