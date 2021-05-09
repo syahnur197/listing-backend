@@ -1,8 +1,8 @@
-require("dotenv").config();
+const { config_app } = require("../config/config");
 
 const jwt = require("jsonwebtoken");
-const KEY = process.env.APP_KEY;
-const REFRESH_KEY = process.env.REFRESH_KEY;
+const KEY = config_app.key;
+const REFRESH_KEY = config_app.refresh_key;
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;

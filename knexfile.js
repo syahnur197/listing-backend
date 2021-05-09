@@ -1,14 +1,16 @@
 // Update with your config settings.
 
-require("dotenv").config();
+const { config_db } = require("./config/config");
 
 module.exports = {
   development: {
-    client: process.env.DATABASE_CLIENT,
+    client: config_db.client,
     connection: {
-      database: process.env.DATABASE_DB,
-      user: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_ROOT_PASSWORD,
+      port: config_db.port,
+      host: config_db.host,
+      database: config_db.db,
+      user: config_db.username,
+      password: config_db.password,
     },
     pool: {
       min: 2,
@@ -24,11 +26,13 @@ module.exports = {
   },
 
   production: {
-    client: process.env.DATABASE_CLIENT,
+    client: config_db.client,
     connection: {
-      database: process.env.DATABASE_DB,
-      user: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_ROOT_PASSWORD,
+      port: config_db.port,
+      host: config_db.host,
+      database: config_db.db,
+      user: config_db.username,
+      password: config_db.password,
     },
     pool: {
       min: 2,
