@@ -1,4 +1,4 @@
-const Model = require("../config/model");
+const Model = require("../../config/model");
 
 class Item extends Model {
   static get tableName() {

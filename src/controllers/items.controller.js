@@ -1,7 +1,10 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
+const router = express.Router();
+
 const { authenticateToken } = require("../middlewares/authenticateToken");
 const Item = require("../models/item");
+
 const {
   getAllItems,
   getItemById,
@@ -9,7 +12,6 @@ const {
   updateItem,
   deleteItem,
 } = require("../services/items.service");
-const router = express.Router();
 
 router.get("/", async (req, res) => {
   const { page } = req.query;
@@ -41,8 +43,8 @@ router.post(
   body("name")
     .isLength({ min: 1 })
     .withMessage("Name must not be less than 1 character")
-    .isLength({ max: 255 })
-    .withMessage("Name must not be more than 255 characters"),
+    .isLength({ max: 40 })
+    .withMessage("Name must not be more than 40 characters"),
 
   body("price")
     .notEmpty()

@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("properties", (table) => {
-    table.increments("id").primary();
+    table.bigIncrements("id").primary();
     table.bigInteger("user_id").index();
     table.string("status");
     table.string("district");

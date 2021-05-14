@@ -1,13 +1,11 @@
 const faker = require("faker");
-const User = require("../../models/user");
+const User = require("../../src/models/user");
 
 exports.seed = async function (knex) {
   knex.raw("TRUNCATE TABLE users CASCADE");
   const PASSWORD = "password";
 
   await User.query().insert({
-    first_name: "Admin",
-    last_name: "Admin",
     username: "admin",
     password: PASSWORD,
     email: "admin@admin.com",
@@ -22,8 +20,6 @@ exports.seed = async function (knex) {
     let random_number = Math.floor(8000000 + Math.random() * 900000);
     let phone_number = `${BRU_NUMBER}${random_number}`;
     await User.query().insert({
-      first_name: faker.name.firstName(),
-      last_name: faker.name.lastName(),
       username: faker.name.firstName(),
       password: PASSWORD,
       email: faker.internet.email(),

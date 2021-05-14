@@ -1,13 +1,13 @@
 const faker = require("faker");
-const Property = require("../../models/property");
-const PropertyType = require("../../models/propery-type");
-const User = require("../../models/user");
+const Property = require("../../src/models/property");
+const PropertyType = require("../../src/models/propery-type");
+const User = require("../../src/models/user");
 const {
   pickRandomElement,
   districts,
   categories,
   statuses,
-} = require("../../utils");
+} = require("../../src/utils");
 
 exports.seed = async function (knex) {
   knex.raw("TRUNCATE TABLE properties CASCADE");

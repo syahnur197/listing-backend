@@ -1,4 +1,4 @@
-const Model = require("../config/model");
+const Model = require("../../config/model");
 const { hashPassword } = require("../services/hasher.service");
 const Item = require("./item");
 const Property = require("./property");

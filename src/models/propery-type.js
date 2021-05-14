@@ -1,4 +1,4 @@
-const Model = require("../config/model");
+const Model = require("../../config/model");
 const Property = require("./property");
 
 class PropertyType extends Model {

@@ -1,6 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-const { accessLogStream } = require("../config/accessLogStream");
+const { accessLogStream } = require("../../config/accessLogStream");
 
 exports.setMiddlewares = (app) => {
   // setting up request logger

@@ -19,10 +19,7 @@ exports.getItemById = async (item_id) => {
 };
 
 exports.findItem = async (property) => {
-  const key = Object.keys(property)[0];
-  const value = property[key];
-
-  const items = await Item.query().where(key, value);
+  const items = await this.findItems(property);
 
   return items[0];
 };

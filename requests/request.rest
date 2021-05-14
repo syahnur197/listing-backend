@@ -1,8 +1,8 @@
-GET http://localhost:3000/api/users
+GET http://localhost:4000/api/users
 
 ###
 
-POST http://localhost:3000/api/auth/login
+POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
@@ -13,12 +13,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/api/auth/
+GET http://localhost:4000/api/auth/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTYyMDQxNDUzMCwiZXhwIjoxNjIwNTAwOTMwfQ._JpzUc0WvAWNsM5gtma2HKKM2cYx8WJQXPFDbRyikxs
 
 ###
 
-POST http://localhost:3000/api/auth/token
+POST http://localhost:4000/api/auth/token
 Content-Type: application/json
 
 {
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/api/auth/
+DELETE http://localhost:4000/api/auth/
 Content-Type: application/json
 
 {

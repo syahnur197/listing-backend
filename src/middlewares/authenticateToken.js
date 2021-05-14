@@ -1,6 +1,6 @@
 const { findUserByEmail } = require("../services/users.service");
 const jwt = require("jsonwebtoken");
-const { config_app } = require("../config/config");
+const { config_app } = require("../../config/config");
 
 exports.authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
