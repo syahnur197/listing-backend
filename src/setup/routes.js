@@ -8,5 +8,9 @@ exports.setRoutes = (app) => {
   app.use("/api/auth", auth);
   app.use("/api/items", items);
   app.use("/api/cars", cars);
+
+  app.get("/", (req, res) => {
+    res.json({ success: true, message: "it works" });
+  });
   return app;
 };
