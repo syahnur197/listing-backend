@@ -8,9 +8,9 @@ Content-Type: application/json
     "page": 1,
     "properties": [
         {
-            "key": "price",
-            "operator": ">",
-            "value" : "1000"
+            "key": "brand",
+            "operator": "=",
+            "value" : "Audi"
         }
     ]
 }

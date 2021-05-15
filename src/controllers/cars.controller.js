@@ -6,6 +6,7 @@ const {
   transmissions,
   driveTypes,
   paymentTerms,
+  bodyTypes,
 } = require("../constants/cars");
 const router = express.Router();
 
@@ -82,6 +83,16 @@ router.post(
     .withMessage("Model must not be less than 1 character")
     .isLength({ max: 40 })
     .withMessage("Model must not be more than 40 characters"),
+
+  body("body_type")
+    .notEmpty()
+    .withMessage("Body Type must not be empty")
+    .custom((value) => {
+      if (!bodyTypes.includes(value)) {
+        return Promise.reject("Body Type selected is not valid!");
+      }
+      return true;
+    }),
 
   body("fuel_type")
     .notEmpty()

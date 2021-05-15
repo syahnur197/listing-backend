@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("items", (table) => {
-    table.bigIncrements("id").primary();
-    table.bigInteger("user_id").index();
+    table.increments("id").primary();
+    table.integer("user_id").unsigned().index();
     table.string("name");
     table.text("description");
     table.decimal("price", 8, 2);

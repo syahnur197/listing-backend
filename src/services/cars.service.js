@@ -8,7 +8,7 @@ exports.getAllCars = async (current_page = 1, properties = []) => {
 
   let query = Car.query().withGraphFetched("user");
 
-  query = appendFilter(query);
+  query = appendFilter(query, properties);
 
   query = query.orderBy("created_at", "desc");
 

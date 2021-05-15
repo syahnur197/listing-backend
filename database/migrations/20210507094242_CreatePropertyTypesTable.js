@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("property_types", (table) => {
-    table.bigIncrements("id").primary();
+    table.increments("id").primary();
     table.string("name");
   });
 };

@@ -134,7 +134,7 @@ router.post("/login", async (req, res) => {
 
   await storeRefreshToken(user.email, refresh_token);
 
-  res.status(200).json({ user, access_token, refresh_token });
+  res.status(200).json({ success: true, user, access_token, refresh_token });
 });
 
 router.post("/token", async (req, res) => {
