@@ -7,7 +7,11 @@ exports.setMiddlewares = (app) => {
   // setting up request logger
   app.use(
     cors({
-      origin: ["http://localhost:3000"],
+      origin: [
+        "http://localhost:3000",
+        "https://brulisting.vercel.app",
+        "https://brulisting.syahnurnizam.com",
+      ],
     })
   );
 
