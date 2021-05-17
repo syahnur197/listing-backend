@@ -9,6 +9,7 @@
     "make:migration": "npx knex migrate:make"
   },
   "dependencies": {
+    "aws-sdk": "^2.907.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -21,10 +22,13 @@
     "knex": "^0.95.4",
     "morgan": "^1.10.0",
     "morgan-body": "^2.6.5",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "objection": "^2.2.15",
     "pg": "^8.6.0",
     "rotating-file-stream": "^2.1.5",
+    "sharp": "^0.28.2",
+    "uuid": "^8.3.2",
     "validator": "^13.6.0"
   },
   "devDependencies": {

@@ -13,6 +13,7 @@ exports.up = function (knex) {
     table.bigInteger("mileage");
     table.string("colour", 20).nullable();
     table.text("description").nullable();
+    table.json("images").nullable();
     table.datetime("sold_at").default(null).nullable();
     table.timestamps(true, true);
 

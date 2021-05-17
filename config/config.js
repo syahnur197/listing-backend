@@ -15,3 +15,10 @@ exports.config_db = {
   password: process.env.DATABASE_PASSWORD || "secret",
   db: process.env.DATABASE_DB || "database",
 };
+
+exports.config_aws = {
+  accessKeyId: process.env.AWS_ID,
+  secretAccessKey: process.env.AWS_SECRET,
+  region: process.env.AWS_REGION,
+  s3Bucket: process.env.AWS_BUCKET,
+};
