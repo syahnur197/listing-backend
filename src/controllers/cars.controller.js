@@ -104,8 +104,6 @@ router.post(
   async function (req, res) {
     const car = req.car;
 
-    console.log("uploadedImages", !req.uploadedImages);
-
     if (!req?.uploadedImages) {
       res.status(201).json({ car });
       return;

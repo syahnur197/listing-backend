@@ -128,13 +128,18 @@ router.post("/login", async (req, res) => {
     return;
   }
 
+  // in the mean time, malas ku kan maintain the access token and refresh token
+  // in the future, I should implement method untuk expiring the access token
+
   const access_token = generateAccessToken({ email: user.email });
 
   const refresh_token = generateRefreshToken({ email: user.email });
 
   await storeRefreshToken(user.email, refresh_token);
 
-  res.status(200).json({ success: true, user, access_token, refresh_token });
+  res
+    .status(200)
+    .json({ success: true, user, access_token: refresh_token, refresh_token });
 });
 
 router.post("/token", async (req, res) => {

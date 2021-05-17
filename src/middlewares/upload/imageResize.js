@@ -38,9 +38,7 @@ const resizeAndUpload = (fileBuffer, filePath, fileSizes) => {
     await sharp(fileBuffer)
       .resize({
         width: fileSize,
-        height: fileSize,
         fit: "cover",
-        position: sharp.strategy.entropy,
       })
       .webp({ quality: 50, lossless: false }) // compression ftw!!!
       .toBuffer()
