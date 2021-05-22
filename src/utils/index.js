@@ -31,6 +31,24 @@ exports.appendFilter = (query, properties = []) => {
   return query;
 };
 
+exports.formatMobileNumber = (mobile_number) => {
+  mobile_number = mobile_number.replace(/-/g, "").replace(/\s/g, "");
+
+  if (mobile_number.substr(0, 4) === "+673" && mobile_number.length === 11)
+    return mobile_number;
+
+  if (mobile_number.substr(0, 3) === "673" && mobile_number.length === 10)
+    return `+${mobile_number}`;
+
+  if (
+    ["8", "7"].includes(mobile_number.substr(0, 1)) &&
+    mobile_number.length === 7
+  )
+    return `+673${mobile_number}`;
+
+  throw new Error("Invalid phone number format! Must be Brunei phone number!");
+};
+
 exports.districts = ["Brunei & Muara", "Tutong", "Belait", "Temburong"];
 
 exports.categories = ["Sale", "Rent"];

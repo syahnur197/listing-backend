@@ -15,6 +15,7 @@ const {
   storeRefreshToken,
   findUserByToken,
   deleteRefreshToken,
+  findUserByMobileNumber,
 } = require("../services/users.service");
 
 const router = express.Router();
@@ -26,17 +27,17 @@ router.get("/", authenticateToken, async (req, res) => {
 router.post(
   "/register",
 
-  body("first_name")
-    .isLength({ min: 3 })
-    .withMessage("First name must not be less than characters")
-    .isLength({ max: 255 })
-    .withMessage("First name must not be mroe than 255 characters"),
+  // body("first_name")
+  //   .isLength({ min: 3 })
+  //   .withMessage("First name must not be less than characters")
+  //   .isLength({ max: 255 })
+  //   .withMessage("First name must not be mroe than 255 characters"),
 
-  body("last_name")
-    .isLength({ min: 3 })
-    .withMessage("Last name must not be less than characters")
-    .isLength({ max: 255 })
-    .withMessage("Last name must not be mroe than 255 characters"),
+  // body("last_name")
+  //   .isLength({ min: 3 })
+  //   .withMessage("Last name must not be less than characters")
+  //   .isLength({ max: 255 })
+  //   .withMessage("Last name must not be mroe than 255 characters"),
 
   body("username")
     .isLength({ min: 3 })
@@ -79,25 +80,37 @@ router.post(
       return true;
     }),
 
+  body("mobile_number")
+    .notEmpty()
+    .withMessage("Mobile number is required for buyers to contact")
+    .isLength({ min: 10 })
+    .withMessage(
+      "Mobile number must be at least 10 characters. i.e, 6738885555"
+    )
+    .isLength({ max: 10 })
+    .withMessage("Mobile number must be at most 10 characters. i.e, 6738885555")
+    .custom((value) => {
+      return findUserByMobileNumber(value).then((user) => {
+        if (user instanceof User) {
+          return Promise.reject("Mobile number is already used");
+        }
+      });
+    }),
+
   async (req, res) => {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      setTimeout(() => {
+        res.status(400).json({ errors: errors.array() });
+      }, 1000);
+      return;
     }
 
-    const {
-      first_name,
-      last_name,
-      username,
-      email,
-      password,
-      password_confirmation,
-      mobile_number,
-    } = req.body;
+    const { username, email, password, password_confirmation, mobile_number } =
+      req.body;
 
     user = await createUser({
-      first_name,
-      last_name,
       username,
       email,
       password,
@@ -105,7 +118,10 @@ router.post(
       mobile_number,
     });
 
-    res.status(201).json({ user });
+    setTimeout(() => {
+      res.status(201).json({ user });
+    }, 1000);
+    return;
   }
 );
 

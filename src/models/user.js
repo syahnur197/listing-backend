@@ -1,5 +1,6 @@
 const Model = require("../../config/model");
 const { hashPassword } = require("../services/hasher.service");
+const { formatMobileNumber } = require("../utils");
 const Item = require("./item");
 const Property = require("./property");
 
@@ -36,6 +37,8 @@ class User extends Model {
   async $beforeInsert(queryContext) {
     await super.$beforeInsert(queryContext);
     this.password = await hashPassword(this.password);
+
+    this.mobile_number = formatMobileNumber(this.mobile_number);
   }
 
   $formatJson(jsonRaw) {

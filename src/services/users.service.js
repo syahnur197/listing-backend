@@ -24,6 +24,12 @@ exports.findUserByUsername = async (username) => {
   return user[0];
 };
 
+exports.findUserByMobileNumber = async (mobile_number) => {
+  const user = await User.query().where("mobile_number", mobile_number);
+
+  return user[0];
+};
+
 exports.findUserByToken = async (refresh_token) => {
   const user = await User.query().where("refresh_token", refresh_token);
 
@@ -32,8 +38,6 @@ exports.findUserByToken = async (refresh_token) => {
 
 exports.createUser = async (user_detail) => {
   const user = await User.query().insert({
-    first_name: user_detail.first_name,
-    last_name: user_detail.last_name,
     username: user_detail.username,
     email: user_detail.email,
     password: user_detail.password,
